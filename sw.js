@@ -1,6 +1,6 @@
 // Service worker: ưu tiên mạng để luôn có bản mới, mất mạng thì dùng bản đã lưu.
-const CACHE = 'tuvung-v1';
-const FILES = ['./', './index.html', './app.js', './manifest.webmanifest', './icon.svg'];
+const CACHE = 'tuvung-v2';
+const FILES = ['./', './index.html', './app.js', './style.css', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
